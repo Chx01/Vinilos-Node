@@ -29,13 +29,13 @@ module.exports = Vinilo;
  * @swagger
  * components:
  *   schemas:
- *     Vinilos:
+ *     Vinilo:
  *        type: object
  *        required:
- *        -titulo
- *        -artista
- *        -anio
- *        -genero
+ *          -titulo
+ *          -artista
+ *          -anio
+ *          -genero
  *        properties:
  *          titulo:
  *            type: string

@@ -29,3 +29,24 @@ Vinilo.belongsTo(Editorial, {
 });
 
 module.exports = Editorial;
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Editoriales:
+ *        type: object
+ *        required:
+ *          -nombre
+ *          -pais
+ *        properties:
+ *          nombre:
+ *            type: string
+ *            description: El nombre de la editorial.
+ *          pais:
+ *            type: string
+ *            description: El país de la editorial.
+ *        example:
+ *            nombre: Vinilos Enterprice
+ *            pais: España
+ */

@@ -21,3 +21,29 @@ const Prestamo = sequelize.define("prestamos", {
 });
 
 module.exports = Prestamo;
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Prestamo:
+ *        type: object
+ *        required:
+ *          -fechaPrestamo
+ *          -fechaDevolucion
+ *          -estado
+ *        properties:
+ *          fechaPrestamo:
+ *            type: date
+ *            description: La fecha en que se hizo el prestamo.
+ *          fechaDevolucion:
+ *            type: date
+ *            description: La fecha de devolución.
+ *          estado:
+ *            type: enum
+ *            description: El estado del prestamo.
+ *        example:
+ *            fechaPrestamo: 17/09/2025
+ *            fechaDevolucion: 17/10/2025
+ *            estado: prestado
+ */

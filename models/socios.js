@@ -50,3 +50,29 @@ Vinilo.belongsToMany(Socio, {
 });
 
 module.exports = Socio;
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Socio:
+ *        type: object
+ *        required:
+ *          -nombre
+ *          -email
+ *          -telefono
+ *        properties:
+ *          nombre:
+ *            type: string
+ *            description: El nombre del socio.
+ *          email:
+ *            type: string
+ *            description: El gmail del socio.
+ *          telefono:
+ *            type: string
+ *            description: El teléfono del socio.
+ *        example:
+ *            nombre: Juan
+ *            email: juan98@gmail.com
+ *            telefono: 54458793
+ */
