@@ -79,7 +79,7 @@ router.get("/:id", async (req, res) => {
  *           application/json:
  *             schema:     
  *               $ref: '#/components/schemas/Vinilo'
- *        500:
+ *       500:
  *          description: Error al crear el vinilo 
  */
 // Crear vinilo
@@ -108,7 +108,7 @@ router.post("/", async (req, res) => {
  *       200:
  *         description: El vinilo se ha actualizado con éxito
  *       500:
- *          description: Error al actualizar el vinilo o el vinilo no existe
+ *         description: Error al actualizar el vinilo o el vinilo no existe
  */
 // Actualizar vinilo
 router.put("/:id", async (req, res) => {
@@ -133,10 +133,10 @@ router.put("/:id", async (req, res) => {
  *         required: true
  *         description: El ID del vinilo a eliminar
  *     responses:
- *       200:
- *         description: El vinilo se ha eliminado con éxito
- *       500:
- *          description: Error al eliminar el vinilo o el vinilo no existe
+ *         200:
+ *           description: El vinilo se ha eliminado con éxito
+ *         500:
+ *           description: Error al eliminar el vinilo o el vinilo no existe
  */
 // Eliminar vinilo
 router.delete("/:id", async (req, res) => {
