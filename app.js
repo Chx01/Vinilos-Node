@@ -1,22 +1,13 @@
 
 const express =require('express')
 const cors = require("cors");
-const app = express()
+const sequelize = require("./helpers/database.js");
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
-app.get('/', (req, res) => {
-
-    res.send("Hola Mundo!")
-
-})
-
-app.listen(3000, () => {
-
-    console.log("Servidor iniciado en el puerto 3000")
-    
-})
-
-// Instancia de Sequelize para conectarse a la base de datos
-const sequelize = require("./helpers/database.js"); 
+const app = express(); 
+app.use(cors());
+app.use(express.json());
 
 // Importaciones de los modelos 
 const Editorial = require("./models/editoriales.js"); 
@@ -35,29 +26,28 @@ console.log("Todos los modelos se sincronizaron correctamente.");
 console.log("Ha ocurrido un error al sincronizar los modelos: ", err); 
 });
 
-const swaggerJsdoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
-
 // Confugure Swagger
 const swaggerOptions = {
     definition: {
         openapi: '3.0.0',
-        info: { title: 'API Vinilos',
+        info: { title: 'API Gestión de Vinilos',
         version: '1.0.0',
-        description: 'API Vinilos',    
+        description: 'Documentación de la API de gestión de vinilos',    
         },
     },
     apis: ['./routes/*.js', ' ./models/*.js'],
 };
 
 const swaggerSpec = swaggerJsdoc (swaggerOptions);
-
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-// Middlewares
-app.use(cors());
-app.use(express.json());
 
 // Rutas
 app.use("/vinilos", require("./routes/viniloRoutes"));
+
+// Servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`Swagger UI en http://localhost:${PORT}/api-docs`);
+});
 

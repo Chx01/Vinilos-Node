@@ -2,6 +2,23 @@ const express = require("express");
 const router = express.Router();
 const viniloController = require("../controllers/viniloController");
 
+
+/**
+ * @swagger
+ * /vinilos:
+ *   get:
+ *     summary: Obtiene una lista de todos los vinilos
+ *     response:
+ *       200:
+ *         description: Una lista de vinilos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *               $ref: '#/components/schemas/Vinilo' 
+ */
+
 // Obtener todos los vinilos
 router.get("/", async (req, res) => {
   try {
