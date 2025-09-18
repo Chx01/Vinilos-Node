@@ -42,6 +42,11 @@ const swaggerSpec = swaggerJsdoc (swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Rutas
+app.use("/usuarios", require("./routes/usuarioRoutes"));
+app.use("/socios", require("./routes/socioRoutes"));
+app.use("/membresias", require("./routes/membresiaRoutes"));
+app.use("/editoriales", require("./routes/editorialRoutes"));
+app.use("/prestamos", require("./routes/prestamoRoutes"));
 app.use("/vinilos", require("./routes/viniloRoutes"));
 
 // Servidor

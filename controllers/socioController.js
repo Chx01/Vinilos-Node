@@ -1,4 +1,4 @@
-const Socio = require("../models/socio");
+const Socio = require("../models/socios");
 
 const socioController = {
   async getAll() {

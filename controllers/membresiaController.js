@@ -1,4 +1,4 @@
-const Membresia = require("../models/membresia");
+const Membresia = require("../models/membresias");
 
 const membresiaController = {
   async getAll() {

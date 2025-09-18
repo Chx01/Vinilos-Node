@@ -1,5 +1,5 @@
-const Prestamo = require("../models/prestamo");
-const Vinilo = require("../models/vinilo");
+const Prestamo = require("../models/prestamos");
+const Vinilo = require("../models/vinilos");
 
 const prestamoController = {
   async getAll() {

@@ -1,4 +1,4 @@
-const Editorial = require("../models/editorial");
+const Editorial = require("../models/editoriales");
 
 const editorialController = {
   async getAll() {
