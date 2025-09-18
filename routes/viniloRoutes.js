@@ -29,6 +29,28 @@ router.get("/", async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /vinilos/{id}:
+ *   get:
+ *     summary: Obtiene los detalles de un vinilo en específico por su ID
+ *     parameters:
+ *         in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: El ID del vinilo
+ *     responses:
+ *       200:
+ *         description: Los detalles de un vinilo
+ *         content:
+ *           application/json:
+ *             schema:              
+ *               $ref: '#/components/schemas/Vinilo' 
+ *       404:
+ *          description: Vinilo no encontrado
+ */
 // Obtener un vinilo por ID
 router.get("/:id", async (req, res) => {
   try {
@@ -39,6 +61,27 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /vinilos/create:
+ *   post:
+ *     summary: Crea un nuevo vinilo
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Vinilos'
+ *     responses:
+ *       200:
+ *         description: El vinilo se ha creado con éxito
+ *         content:
+ *           application/json:
+ *             schema:     
+ *               $ref: '#/components/schemas/Vinilo'
+ *        500:
+ *          description: Error al crear el vinilo 
+ */
 // Crear vinilo
 router.post("/", async (req, res) => {
   try {
@@ -49,6 +92,24 @@ router.post("/", async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /vinilos/{id}:
+ *   put:
+ *     summary: Actualiza un vinilo por su ID
+ *     parameters:
+ *         in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: El ID del vinilo a actualizar
+ *     responses:
+ *       200:
+ *         description: El vinilo se ha actualizado con éxito
+ *       500:
+ *          description: Error al actualizar el vinilo o el vinilo no existe
+ */
 // Actualizar vinilo
 router.put("/:id", async (req, res) => {
   try {
@@ -59,6 +120,24 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /vinilos/{id}:
+ *   delete:
+ *     summary: Elimina un vinilo por su ID
+ *     parameters:
+ *         in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: El ID del vinilo a eliminar
+ *     responses:
+ *       200:
+ *         description: El vinilo se ha eliminado con éxito
+ *       500:
+ *          description: Error al eliminar el vinilo o el vinilo no existe
+ */
 // Eliminar vinilo
 router.delete("/:id", async (req, res) => {
   try {
