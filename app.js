@@ -1,6 +1,6 @@
 
 const express =require('express')
-
+const cors = require("cors");
 const app = express()
 
 app.get('/', (req, res) => {
@@ -53,3 +53,11 @@ const swaggerOptions = {
 const swaggerSpec = swaggerJsdoc (swaggerOptions);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// Middlewares
+app.use(cors());
+app.use(express.json());
+
+// Rutas
+app.use("/vinilos", require("./routes/viniloRoutes"));
+
