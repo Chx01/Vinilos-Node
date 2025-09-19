@@ -1,26 +1,33 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../helpers/database");
 
-const Vinilo = sequelize.define("vinilos", {
+class Vinilo extends Model {
+  static associate(models) {
+    this.belongsTo(models.Editorial, { foreignKey: "editorialId", as: "editorial" });
+    this.belongsToMany(models.Socio, { through: models.Prestamo, foreignKey: "viniloId", as: "socios" });
+  }
+}
+
+Vinilo.init({
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   titulo: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: DataTypes.STRING(150),
+    allowNull: false
   },
   artista: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  anio: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-  genero: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
+    type: DataTypes.STRING(100),
+    allowNull: false
+  }
 }, {
+  sequelize,
+  modelName: "Vinilo",
+  tableName: "vinilos",
   timestamps: true,
-  paranoid: true,
+  paranoid: true
 });
 
 module.exports = Vinilo;

@@ -1,22 +1,32 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../helpers/database");
 
-const Membresia = sequelize.define("membresias", {
+class Membresia extends Model {
+  static associate(models) {
+    this.belongsTo(models.Socio, { foreignKey: "socioId", as: "socio" });
+  }
+}
+
+Membresia.init({
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   tipo: {
-    type: DataTypes.ENUM("Basica", "Premium"),
-    allowNull: false,
+    type: DataTypes.STRING(50),
+    allowNull: false
   },
-  fechaInicio: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-  fechaExpiracion: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
+  limitePrestamos: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  }
 }, {
+  sequelize,
+  modelName: "Membresia",
+  tableName: "membresias",
   timestamps: true,
-  paranoid: true,
+  paranoid: true
 });
 
 module.exports = Membresia;

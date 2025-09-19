@@ -10,12 +10,21 @@ app.use(cors());
 app.use(express.json());
 
 // Importaciones de los modelos 
+const Rol = require("./models/roles.js");
 const Editorial = require("./models/editoriales.js"); 
 const Membresia = require("./models/membresias.js"); 
 const Prestamo = require("./models/prestamos.js");
 const Socio = require("./models/socios.js");
 const Usuario = require("./models/usuarios.js");
 const Vinilo = require("./models/vinilos.js");
+
+// Asociaciones
+Rol.associate({ Usuario });
+Usuario.associate({ Rol });
+Socio.associate({ Membresia, Vinilo, Prestamo });
+Membresia.associate({ Socio });
+Editorial.associate({ Vinilo });
+Vinilo.associate({ Editorial, Socio, Prestamo });
 
 // Sincronizar los modelos para verificar la conexión con la base de datos
 sequelize

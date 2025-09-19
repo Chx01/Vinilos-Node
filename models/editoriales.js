@@ -1,31 +1,28 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../helpers/database");
-const Vinilo = require("./vinilos");
 
-const Editorial = sequelize.define("editoriales", {
+class Editorial extends Model {
+  static associate(models) {
+    this.hasMany(models.Vinilo, { foreignKey: "editorialId", as: "vinilos" });
+  }
+}
+
+Editorial.init({
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   nombre: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  pais: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
+    type: DataTypes.STRING(100),
+    allowNull: false
+  }
 }, {
+  sequelize,
+  modelName: "Editorial",
+  tableName: "editoriales",
   timestamps: true,
-  paranoid: true,
-});
-
-// 1 a Muchos con Vinilo
-Editorial.hasMany(Vinilo, {
-  foreignKey: "editorialId",
-  onDelete: "CASCADE",
-  onUpdate: "CASCADE"
-});
-Vinilo.belongsTo(Editorial, {
-  foreignKey: "editorialId",
-  onDelete: "CASCADE",
-  onUpdate: "CASCADE"
+  paranoid: true
 });
 
 module.exports = Editorial;

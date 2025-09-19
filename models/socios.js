@@ -1,52 +1,36 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../helpers/database");
-const Membresia = require("./membresias");
-const Vinilo = require("./vinilos");
-const Prestamo = require("./prestamos");
 
-const Socio = sequelize.define("socios", {
+
+class Socio extends Model {
+  static associate(models) {
+    this.hasOne(models.Membresia, { foreignKey: "socioId", as: "membresia" });
+    this.belongsToMany(models.Vinilo, { through: models.Prestamo, foreignKey: "socioId", as: "vinilos" });
+  }
+}
+
+Socio.init({
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   nombre: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: DataTypes.STRING(100),
+    allowNull: false
   },
   email: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(100),
     allowNull: false,
     unique: true,
-  },
-  telefono: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
+    validate: { isEmail: true }
+  }
 }, {
+  sequelize,
+  modelName: "Socio",
+  tableName: "socios",
   timestamps: true,
-  paranoid: true,
-});
-
-// 1 a 1 con Membresía
-Socio.hasOne(Membresia, {
-  foreignKey: "socioId",
-  onDelete: "CASCADE",
-  onUpdate: "CASCADE"
-});
-Membresia.belongsTo(Socio, {
-  foreignKey: "socioId",
-  onDelete: "CASCADE",
-  onUpdate: "CASCADE"
-});
-
-// M a M con Vinilo mediante Prestamo
-Socio.belongsToMany(Vinilo, {
-  through: Prestamo,
-  foreignKey: "socioId",
-  onDelete: "CASCADE",
-  onUpdate: "CASCADE"
-});
-Vinilo.belongsToMany(Socio, {
-  through: Prestamo,
-  foreignKey: "viniloId",
-  onDelete: "CASCADE",
-  onUpdate: "CASCADE"
+  paranoid: true
 });
 
 module.exports = Socio;

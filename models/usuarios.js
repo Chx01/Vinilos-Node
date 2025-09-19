@@ -1,27 +1,40 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../helpers/database");
 
-const Usuario = sequelize.define("usuarios", {
+class Usuario extends Model {
+  static associate(models) {
+    this.belongsTo(models.Rol, { foreignKey: "rolId", as: "rol" });
+  }
+}
+
+Usuario.init({
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   nombre: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: DataTypes.STRING(100),
+    allowNull: false
   },
   email: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(100),
     allowNull: false,
     unique: true,
+    validate: {
+      isEmail: true
+    }
   }, /*
   password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  rol: {
-    type: DataTypes.ENUM("admin", "staff"),
-    allowNull: false,
-  }, */
+    type: DataTypes.STRING(255),
+    allowNull: false
+  } */
 }, {
+  sequelize,
+  modelName: "Usuario",
+  tableName: "usuarios",
   timestamps: true,
-  paranoid: true,
+  paranoid: true
 });
 
 module.exports = Usuario;

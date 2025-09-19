@@ -1,23 +1,33 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../helpers/database");
 
-const Prestamo = sequelize.define("prestamos", {
+class Prestamo extends Model {}
+
+Prestamo.init({
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   fechaPrestamo: {
     type: DataTypes.DATE,
     allowNull: false,
+    defaultValue: DataTypes.NOW
   },
   fechaDevolucion: {
     type: DataTypes.DATE,
-    allowNull: true,
+    allowNull: true
   },
   estado: {
     type: DataTypes.ENUM("prestado", "devuelto"),
-    allowNull: false,
-    defaultValue: "prestado",
-  },
+    defaultValue: "prestado"
+  }
 }, {
+  sequelize,
+  modelName: "Prestamo",
+  tableName: "prestamos",
   timestamps: true,
-  paranoid: true,
+  paranoid: true
 });
 
 module.exports = Prestamo;
