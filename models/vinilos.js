@@ -10,8 +10,8 @@ class Vinilo extends Model {
 
 Vinilo.init({
   id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true
   },
   titulo: {
