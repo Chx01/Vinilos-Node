@@ -2,11 +2,15 @@ const Usuario = require("../models/usuarios");
 
 const usuarioController = {
   async getAll() {
-    return await Usuario.findAll();
+    return await Usuario.findAll({ 
+    include: {model: Rol, as: "rol"}
+  });
   },
-
+  
   async getById(id) {
-    const usuario = await Usuario.findByPk(id);
+    const usuario = await Usuario.findByPk(id, { 
+    include: {model: Rol, as: "rol"}
+  });
     if (!usuario) throw new Error("Usuario no encontrado");
     return usuario;
   },

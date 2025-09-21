@@ -2,11 +2,11 @@ const Rol = require("../models/roles");
 
 const rolController = {
   async getAll() {
-    return await Rol.findAll({ include: "usuario" });
+    return await Rol.findAll();
   },
 
   async getById(id) {
-    const rol = await Rol.findByPk(id, { include: "usuario" });
+    const rol = await Rol.findByPk(id);
     if (!rol) throw new Error("Rol no encontrado");
     return rol;
   },
