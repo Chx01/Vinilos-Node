@@ -1,25 +1,24 @@
 const express = require("express");
 const router = express.Router();
-const usuarioController = require("../controllers/socioController");
+const rolController = require("../controllers/rolController");
 
 /**
  * @swagger
- * /socios:
+ * /roles:
  *   get:
- *     summary: Obtiene una lista de todos los socios
+ *     summary: Obtiene una lista de todos los roles
  *     responses:
  *       200:
- *         description: Una lista de socios
+ *         description: Una lista de roles
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                
+ *       404:        
+ *         description: Rol no encontrado      
  */
 router.get("/", async (req, res) => {
   try {
-    const data = await socioController.getAll();
+    const data = await rolController.getAll();
     res.json(data);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -28,29 +27,29 @@ router.get("/", async (req, res) => {
 
 /**
  * @swagger
- * /socios/{id}:
+ * /roles/{id}:
  *   get:
- *     summary: Obtiene los detalles de un socio en específico por su ID
+ *     summary: Obtiene los detalles de un rol en específico por su ID
  *     parameters:
  *         in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: El ID del socio
+ *         description: El ID del rol
  *     responses:
  *       200:
- *         description: Los detalles de un socio
+ *         description: Los detalles de un rol
  *         content:
  *           application/json:
  *             schema:              
  *                
  *       404:
- *          description: Socio no encontrado
+ *          description: Rol no encontrado
  */
 router.get("/:id", async (req, res) => {
   try {
-    const data = await socioController.getById(req.params.id);
+    const data = await rolController.getById(req.params.id);
     res.json(data);
   } catch (error) {
     res.status(404).json({ error: error.message });
@@ -59,9 +58,9 @@ router.get("/:id", async (req, res) => {
 
 /**
  * @swagger
- * /socios/create:
+ * /roles/create:
  *   post:
- *     summary: Crea un nuevo socio
+ *     summary: Crea un nuevo rol
  *     requestBody:
  *       required: true
  *       content:
@@ -70,17 +69,17 @@ router.get("/:id", async (req, res) => {
  *              
  *     responses:
  *       200:
- *         description: El socio se ha creado con éxito
+ *         description: El rol se ha creado con éxito
  *         content:
  *           application/json:
  *             schema:     
- *               
+ *                
  *       500:
- *          description: Error al crear el socio 
+ *          description: Error al crear el rol 
  */
 router.post("/", async (req, res) => {
   try {
-    const data = await socioController.create(req.body);
+    const data = await rolController.create(req.body);
     res.status(201).json(data);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -89,25 +88,25 @@ router.post("/", async (req, res) => {
 
 /**
  * @swagger
- * /socios/{id}:
+ * /roles/{id}:
  *   put:
- *     summary: Actualiza un socio por su ID
+ *     summary: Actualiza un rol por su ID
  *     parameters:
  *         in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: El ID del socio a actualizar
+ *         description: El ID del rol a actualizar
  *     responses:
  *       200:
- *         description: El socio se ha actualizado con éxito
+ *         description: El rol se ha actualizado con éxito
  *       500:
- *         description: Error al actualizar el socio o el socio no existe
+ *         description: Error al actualizar el rol o el rol no existe
  */
 router.put("/:id", async (req, res) => {
   try {
-    const data = await socioController.update(req.params.id, req.body);
+    const data = await rolController.update(req.params.id, req.body);
     res.json(data);
   } catch (error) {
     res.status(404).json({ error: error.message });
@@ -116,25 +115,25 @@ router.put("/:id", async (req, res) => {
 
 /**
  * @swagger
- * /socios/{id}:
+ * /roles/{id}:
  *   delete:
- *     summary: Elimina un socio por su ID
+ *     summary: Elimina un rol por su ID
  *     parameters:
  *         in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: El ID del socio a eliminar
+ *         description: El ID del rol a eliminar
  *     responses:
  *         200:
- *           description: El socio se ha eliminado con éxito
+ *           description: El rol se ha eliminado con éxito
  *         500:
- *           description: Error al eliminar el socio o el socio no existe
+ *           description: Error al eliminar el rol o el rol no existe
  */
 router.delete("/:id", async (req, res) => {
   try {
-    const data = await socioController.remove(req.params.id);
+    const data = await rolController.remove(req.params.id);
     res.json(data);
   } catch (error) {
     res.status(404).json({ error: error.message });
