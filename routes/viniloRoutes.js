@@ -8,7 +8,7 @@ const viniloController = require("../controllers/viniloController");
  * /vinilos:
  *   get:
  *     summary: Obtiene una lista de todos los vinilos
- *     response:
+ *     responses:
  *       200:
  *         description: Una lista de vinilos
  *         content:
@@ -16,7 +16,7 @@ const viniloController = require("../controllers/viniloController");
  *             schema:
  *               type: array
  *               items:
- *               $ref: '#/components/schemas/Vinilo' 
+ *                
  */
 
 // Obtener todos los vinilos
@@ -47,7 +47,7 @@ router.get("/", async (req, res) => {
  *         content:
  *           application/json:
  *             schema:              
- *               $ref: '#/components/schemas/Vinilo' 
+ *                
  *       404:
  *          description: Vinilo no encontrado
  */
@@ -71,14 +71,14 @@ router.get("/:id", async (req, res) => {
  *       content:
  *         application/json:
  *            schema:
- *              $ref: '#/components/schemas/Vinilos'
+ *              
  *     responses:
  *       200:
  *         description: El vinilo se ha creado con éxito
  *         content:
  *           application/json:
  *             schema:     
- *               $ref: '#/components/schemas/Vinilo'
+ *               
  *       500:
  *          description: Error al crear el vinilo 
  */
