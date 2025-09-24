@@ -27,3 +27,19 @@ Rol.init({
 });
 
 module.exports = Rol;
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Rol:
+ *        type: object
+ *        required:
+ *          -nombre
+ *        properties:
+ *          nombre:
+ *            type: string
+ *            description: El nombre del rol.         
+ *        example:
+ *            nombre: Administrador           
+ */
