@@ -8,6 +8,8 @@ const swaggerUi = require('swagger-ui-express');
 const app = express(); 
 app.use(cors());
 app.use(express.json());
+app.use(verificarAutentificacion);
+
 
 // Importaciones de los modelos 
 const Rol = require("./models/roles.js");
