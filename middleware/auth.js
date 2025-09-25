@@ -5,3 +5,5 @@ function verificarAutentificacion(req, res, next) {
         res.status(401).send('No estas autenticado');
     }
 }
+
+module.exports = verificarAutentificacion;

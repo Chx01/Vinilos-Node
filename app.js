@@ -4,11 +4,13 @@ const cors = require("cors");
 const sequelize = require("./helpers/database.js");
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const winston = require('winston');
+const errorHandler = require('./middleware/err.js');
 
 const app = express(); 
 app.use(cors());
 app.use(express.json());
-app.use(verificarAutentificacion);
+
 
 
 // Importaciones de los modelos 
@@ -19,6 +21,7 @@ const Prestamo = require("./models/prestamos.js");
 const Socio = require("./models/socios.js");
 const Usuario = require("./models/usuarios.js");
 const Vinilo = require("./models/vinilos.js");
+
 
 // Asociaciones
 Rol.associate({ Usuario });
@@ -59,6 +62,9 @@ app.use("/membresias", require("./routes/membresiaRoutes"));
 app.use("/editoriales", require("./routes/editorialRoutes"));
 app.use("/prestamos", require("./routes/prestamoRoutes"));
 app.use("/vinilos", require("./routes/viniloRoutes"));
+
+//Middleware manejo de errores
+app.use(errorHandler);
 
 // Servidor
 const PORT = process.env.PORT || 3000;
