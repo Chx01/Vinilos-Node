@@ -23,9 +23,12 @@ const viniloController = require("../controllers/viniloController");
 router.get("/", async (req, res) => {
   try {
     const vinilos = await viniloController.getAll();
-    res.json(vinilos);
+  if(!data) {
+    throw new AppError("No se encontraron vinilos", 400);
+  }
+  res.json(data);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    next(error);
   }
 });
 
@@ -55,9 +58,12 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const vinilo = await viniloController.getById(req.params.id);
-    res.json(vinilo);
+  if(!data) {
+    throw new AppError("No se encontró el vinilo", 400);
+  }
+  res.json(data);
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    next(error);
   }
 });
 

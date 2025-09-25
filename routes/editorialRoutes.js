@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const usuarioController = require("../controllers/editorialController");
+const AppError = require("../errors/AppError");
 
 /**
  * @swagger
@@ -20,10 +21,13 @@ const usuarioController = require("../controllers/editorialController");
 
 router.get("/", async (req, res) => {
   try {
-    const data = await editorialController.getAll();
-    res.json(data);
+    const data = await editorialController.getAll();  
+  if(!data) {
+    throw new AppError("No se encontraron editoriales", 400);
+  }
+  res.json(data);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    next(error);
   }
 });
 
@@ -52,9 +56,12 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const data = await editorialController.getById(req.params.id);
+    if(!data) {
+      throw new AppError("No se encontró la editorial", 400);
+    }  
     res.json(data);
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    next(error);
   }
 });
 

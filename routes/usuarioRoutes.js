@@ -20,9 +20,12 @@ const usuarioController = require("../controllers/usuarioController");
 router.get("/", async (req, res) => {
   try {
     const data = await usuarioController.getAll();
-    res.json(data);
+  if(!data) {
+    throw new AppError("No se encontraron usuarios", 400);
+  }
+  res.json(data);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    next(error);
   }
 });
 
@@ -51,9 +54,12 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const data = await usuarioController.getById(req.params.id);
-    res.json(data);
+  if(!data) {
+    throw new AppError("No se encontró el usuario", 400);
+  }
+  res.json(data);
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    next(error);
   }
 });
 
