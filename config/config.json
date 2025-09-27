@@ -1,0 +1,23 @@
+{
+"development": {
+    "username": "postgres",
+    "password": "123456",
+    "database": "VinilosDev",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+ },
+ "test": {
+    "username": "postgres",
+    "password": "123456",
+    "database": "VinilosTest",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+ },
+ "production": {
+    "username": "postgres",
+    "password": "123456",
+    "database": "VinilosProd",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+ }
+}
