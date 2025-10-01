@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const usuarioController = require("../controllers/editorialController");
-const AppError = require("../errors/AppError");
+const editorialController = require("../controllers/editorialController");
 
 /**
  * @swagger
@@ -19,7 +18,7 @@ const AppError = require("../errors/AppError");
  *                
  */
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
     const data = await editorialController.getAll();  
   if(!data) {
@@ -53,7 +52,7 @@ router.get("/", async (req, res) => {
  *       404:
  *          description: Editorial no encontrada
  */
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const data = await editorialController.getById(req.params.id);
     if(!data) {

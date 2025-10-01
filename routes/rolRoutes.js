@@ -16,7 +16,7 @@ const rolController = require("../controllers/rolController");
  *       404:        
  *         description: Rol no encontrado      
  */
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
     const data = await rolController.getAll();
   if(!data) {
@@ -50,7 +50,7 @@ router.get("/", async (req, res) => {
  *       404:
  *          description: Rol no encontrado
  */
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const data = await rolController.getById(req.params.id);
   if(!data) {

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const usuarioController = require("../controllers/socioController");
+const socioController = require("../controllers/socioController");
 
 /**
  * @swagger
@@ -17,7 +17,7 @@ const usuarioController = require("../controllers/socioController");
  *               items:
  *                
  */
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
     const data = await socioController.getAll();
   if(!data) {
@@ -51,7 +51,7 @@ router.get("/", async (req, res) => {
  *       404:
  *          description: Socio no encontrado
  */
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const data = await socioController.getById(req.params.id);
   if(!data) {

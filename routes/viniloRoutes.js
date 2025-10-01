@@ -20,7 +20,7 @@ const viniloController = require("../controllers/viniloController");
  */
 
 // Obtener todos los vinilos
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
     const vinilos = await viniloController.getAll();
   if(!data) {
@@ -55,7 +55,7 @@ router.get("/", async (req, res) => {
  *          description: Vinilo no encontrado
  */
 // Obtener un vinilo por ID
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const vinilo = await viniloController.getById(req.params.id);
   if(!data) {

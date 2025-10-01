@@ -17,7 +17,7 @@ const usuarioController = require("../controllers/usuarioController");
  *               items:
  *                
  */
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
     const data = await usuarioController.getAll();
   if(!data) {
@@ -51,7 +51,7 @@ router.get("/", async (req, res) => {
  *       404:
  *          description: Usuario no encontrado
  */
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const data = await usuarioController.getById(req.params.id);
   if(!data) {
