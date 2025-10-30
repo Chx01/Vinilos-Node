@@ -2,6 +2,22 @@ const express = require("express");
 const router = express.Router();
 const viniloController = require("../controllers/viniloController");
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Vinilo:
+ *        type: object
+ *        properties:
+ *          titulo:
+ *            type: string
+ *          artista:
+ *            type: string
+ *          anio:
+ *            type: integer
+ *          genero:
+ *            type: string 
+ */
 
 /**
  * @swagger
@@ -76,15 +92,15 @@ router.get("/:id", async (req, res, next) => {
  *       required: true
  *       content:
  *         application/json:
- *            schema:
- *              
+ *          schema:
+ *            $ref: '#/components/schemas/Vinilo'
  *     responses:
  *       200:
  *         description: El vinilo se ha creado con éxito
  *         content:
  *           application/json:
  *             schema:     
- *               
+ *               $ref: '#/components/schemas/Vinilo'
  *       500:
  *          description: Error al crear el vinilo 
  */

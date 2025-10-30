@@ -21,7 +21,15 @@ Vinilo.init({
   artista: {
     type: DataTypes.STRING(100),
     allowNull: false
-  }
+  },
+  anio: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  genero: {
+    type: DataTypes.STRING(255),
+    allowNull: false
+  },
 }, {
   sequelize,
   modelName: "Vinilo",

@@ -2,6 +2,20 @@ const express = require("express");
 const router = express.Router();
 const membresiaController = require("../controllers/membresiaController");
 
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Membresia:
+ *        type: object
+ *        properties:
+ *          tipo:
+ *            type: string
+ *          limitePrestamos:
+ *            type: integer 
+ */
+
 /**
  * @swagger
  * /membresias:
@@ -73,14 +87,14 @@ router.get("/:id", async (req, res, next) => {
  *       content:
  *         application/json:
  *            schema:
- *              
+ *              $ref: '#/components/schemas/Membresia'
  *     responses:
  *       200:
  *         description: La membresía se ha creado con éxito
  *         content:
  *           application/json:
  *             schema:     
- *               
+ *               $ref: '#/components/schemas/Membresia'
  *       500:
  *          description: Error al crear la membresía 
  */

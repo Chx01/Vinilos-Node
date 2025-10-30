@@ -35,15 +35,11 @@ module.exports = Editorial;
  *        type: object
  *        required:
  *          -nombre
- *          -pais
  *        properties:
  *          nombre:
  *            type: string
  *            description: El nombre de la editorial.
- *          pais:
- *            type: string
- *            description: El país de la editorial.
  *        example:
  *            nombre: Vinilos Enterprice
- *            pais: España
+ *           
  */

@@ -2,6 +2,18 @@ const express = require("express");
 const router = express.Router();
 const editorialController = require("../controllers/editorialController");
 
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Editorial:
+ *        type: object
+ *        properties:
+ *          nombre:
+ *            type: string 
+ */
+
 /**
  * @swagger
  * /editoriales:
@@ -17,7 +29,6 @@ const editorialController = require("../controllers/editorialController");
  *               items:
  *                
  */
-
 router.get("/", async (req, res, next) => {
   try {
     const data = await editorialController.getAll();  
@@ -74,14 +85,14 @@ router.get("/:id", async (req, res, next) => {
  *       content:
  *         application/json:
  *            schema:
- *              
+ *              $ref: '#/components/schemas/Editorial'
  *     responses:
  *       200:
  *         description: La editorial se ha creado con éxito
  *         content:
  *           application/json:
  *             schema:     
- *               
+ *               $ref: '#/components/schemas/Editorial'
  *       500:
  *          description: Error al crear la editorial 
  */

@@ -48,6 +48,7 @@ module.exports = Usuario;
  *        required:
  *          -nombre
  *          -email
+ *          -password
  *        properties:
  *          nombre:
  *            type: string
@@ -58,4 +59,5 @@ module.exports = Usuario;
  *        example:
  *            nombre: Chx01
  *            email: chri1994@gmail.com
+ *            password: 123456
  */

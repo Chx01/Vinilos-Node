@@ -39,20 +39,15 @@ module.exports = Membresia;
  *        type: object
  *        required:
  *          -tipo
- *          -fechaInicio
- *          -fechaExpiracion          
+ *          -limitePrestamos         
  *        properties:
  *          tipo:
  *            type: enum
  *            description: El tipo de membresía.
- *          fechaInicio:
- *            type: date
- *            description: La fecha de inicio de la membresía.
- *          fechaExpiracion:
- *            type: date
- *            description: La fecha en que expira la membresía.
+ *          limitePrestamos:
+ *            type: integer
+ *            description: El limite de prestamos de la membresía.
  *        example:
  *            tipo: Premium
- *            fechaInicio: 17/09/2025
- *            fechaExpiracion: 17/09/2026        
+ *            limitePrestamos: 10        
  */

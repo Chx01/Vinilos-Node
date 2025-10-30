@@ -44,7 +44,6 @@ module.exports = Socio;
  *        required:
  *          -nombre
  *          -email
- *          -telefono
  *        properties:
  *          nombre:
  *            type: string
@@ -52,11 +51,7 @@ module.exports = Socio;
  *          email:
  *            type: string
  *            description: El gmail del socio.
- *          telefono:
- *            type: string
- *            description: El teléfono del socio.
  *        example:
  *            nombre: Juan
  *            email: juan98@gmail.com
- *            telefono: 54458793
  */
