@@ -24,11 +24,16 @@ Usuario.init({
     validate: {
       isEmail: true
     }
-  }, /*
+  },
+  /* 
   password: {
     type: DataTypes.STRING(255),
     allowNull: false
   } */
+  imagen: {
+    type: DataTypes.STRING(255),
+    allowNull: true
+  }
 }, {
   sequelize,
   modelName: "Usuario",

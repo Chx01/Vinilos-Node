@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const viniloController = require("../controllers/viniloController");
+const AppError = require("../errors/AppError");
 
 /**
  * @swagger
@@ -39,10 +40,8 @@ const viniloController = require("../controllers/viniloController");
 router.get("/", async (req, res, next) => {
   try {
     const vinilos = await viniloController.getAll();
-  if(!data) {
-    throw new AppError("No se encontraron vinilos", 400);
-  }
-  res.json(data);
+    // Devuelve 200 con [] si no hay registros, para UX consistente en frontend
+    res.json(vinilos || []);
   } catch (error) {
     next(error);
   }
@@ -74,10 +73,10 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const vinilo = await viniloController.getById(req.params.id);
-  if(!data) {
-    throw new AppError("No se encontró el vinilo", 400);
-  }
-  res.json(data);
+    if(!vinilo) {
+      throw new AppError("No se encontró el vinilo", 404);
+    }
+    res.json(vinilo);
   } catch (error) {
     next(error);
   }

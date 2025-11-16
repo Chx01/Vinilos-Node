@@ -3,7 +3,7 @@ const sequelize = require("../helpers/database");
 
 class Membresia extends Model {
   static associate(models) {
-    this.belongsTo(models.Socio, { foreignKey: "socioId", as: "socio" });
+    this.hasMany(models.Socio, { foreignKey: "membresiaId", as: "membresia"});
   }
 }
 

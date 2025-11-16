@@ -6,10 +6,14 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const winston = require('winston');
 const errorHandler = require('./middleware/err.js');
+const requestLogger = require('./middleware/requestLogger.js');
+const path = require('path');
 
 const app = express(); 
 app.use(cors());
 app.use(express.json());
+app.use(requestLogger);
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 
@@ -67,7 +71,7 @@ app.use("/vinilos", require("./routes/viniloRoutes"));
 app.use(errorHandler);
 
 // Servidor
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
   console.log(`Swagger UI en http://localhost:${PORT}/api-docs`);

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const usuarioController = require("../controllers/usuarioController");
+const upload = require("../middleware/upload");
 
 /**
  * @swagger
@@ -144,6 +145,16 @@ router.delete("/:id", async (req, res) => {
     res.json(data);
   } catch (error) {
     res.status(404).json({ error: error.message });
+  }
+});
+
+// Subida de imagen de usuario
+router.post("/:id/imagen", upload.single("imagen"), async (req, res) => {
+  try {
+    const result = await usuarioController.updateImage(req.params.id, req.file);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 });
 
