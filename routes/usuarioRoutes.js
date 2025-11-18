@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const usuarioController = require("../controllers/usuarioController");
 const upload = require("../middleware/upload");
+const authenticationController = require("../controllers/authenticationController");
 
 /**
  * @swagger
@@ -155,6 +156,44 @@ router.post("/:id/imagen", upload.single("imagen"), async (req, res) => {
     res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ error: error.message });
+  }
+});
+
+//Loguearse
+router.post("/login", async (req, res, next) => {
+  const { nombre, email, password } = req.body;
+  if(!correo || !nombre || !password) {
+    throw new AppError("El nombre de usuario, el correo y la contraseña son obligatorios", 401)
+  }
+  try {
+    const tokens = await authenticationController.login(nombre, email, contraseña);
+    res.status(200).json(tokens);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//Cerrar Sesión
+router.post("/logout", async (req, res, next) => {
+  const { token } = req.body;
+  try {
+    res.status(200).send("Usted a cerrado sesión");
+  } catch (error) {}
+});
+
+//Refrescar Token
+router.post("/usuario/refrenshToken", async (req, res, next) => {
+  const { refreshToken } = req.body;
+  if(!refreshToken) {
+    return next("La Autenticación falló", 401)
+  }
+  try {
+    const token = await authenticationController.refreshAuthToken(refreshToken);
+    res.status(200).json({
+      token,
+  });
+  } catch (error) {
+    next(error);
   }
 });
 
