@@ -1,5 +1,6 @@
 const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../helpers/database");
+const bcrypt = require("bcrypt");
 
 class Usuario extends Model {
   static associate(models) {
@@ -17,14 +18,6 @@ Usuario.init({
     type: DataTypes.STRING(100),
     allowNull: false
   },
-  email: {
-    type: DataTypes.STRING(100),
-    allowNull: false,
-    unique: true,
-    validate: {
-      isEmail: true
-    }
-  },
   password: {
     type: DataTypes.STRING(255),
     allowNull: false
@@ -38,7 +31,19 @@ Usuario.init({
   modelName: "Usuario",
   tableName: "usuarios",
   timestamps: true,
-  paranoid: true
+  paranoid: true,
+  hooks: {
+    async beforeCreate(usuario) {
+      if (usuario.password) {
+        usuario.password = await bcrypt.hash(usuario.password, 10);
+      }
+    },
+    async beforeUpdate(usuario) {
+      if (usuario.changed("password")) {
+        usuario.password = await bcrypt.hash(usuario.password, 10);
+      }
+    },
+  }
 });
 
 module.exports = Usuario;
