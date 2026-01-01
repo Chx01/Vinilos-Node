@@ -61,6 +61,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Rutas
 app.use("/usuarios", require("./routes/usuarioRoutes"));
+app.use("/roles", require("./routes/rolRoutes"));
 app.use("/socios", require("./routes/socioRoutes"));
 app.use("/membresias", require("./routes/membresiaRoutes"));
 app.use("/editoriales", require("./routes/editorialRoutes"));

@@ -199,10 +199,15 @@ router.post("/login-by-nombre", async (req, res, next) => {
     if (!passwordMatch) {
       return next(new AppError("Contraseña Incorrecta", 401));
     }
+    let rolNombre = usuario.rol ? usuario.rol.nombre : null;
+    if (!rolNombre && usuario.rolId) {
+      const rol = await Rol.findByPk(usuario.rolId);
+      rolNombre = rol ? rol.nombre : null;
+    }
     const payload = { usuarioId: usuario.id, nombre: usuario.nombre, rolId: usuario.rolId };
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "30m" });
     const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, { expiresIn: "7d" });
-    return res.status(200).json({ token, refreshToken, user: { id: usuario.id, nombre: usuario.nombre, rolId: usuario.rolId, rolNombre: usuario.rol ? usuario.rol.nombre : null } });
+    return res.status(200).json({ token, refreshToken, user: { id: usuario.id, nombre: usuario.nombre, rolId: usuario.rolId, rolNombre } });
   } catch (error) {
     next(error);
   }

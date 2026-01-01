@@ -25,6 +25,10 @@ Usuario.init({
   imagen: {
     type: DataTypes.STRING(255),
     allowNull: true
+  },
+  rolId: {
+    type: DataTypes.UUID,
+    allowNull: true
   }
 }, {
   sequelize,

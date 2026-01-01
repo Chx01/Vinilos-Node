@@ -4,10 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    let adminRolId = await queryInterface.rawSelect('roles', {
-      where: { nombre: 'Administrador' },
-    }, ['id']);
-
+    let adminRolId = await queryInterface.rawSelect('roles', { where: { nombre: 'Administrador' } }, ['id']);
     if (!adminRolId) {
       adminRolId = uuidv4();
       await queryInterface.bulkInsert('roles', [{
@@ -18,17 +15,14 @@ module.exports = {
       }], {});
     }
 
-    return queryInterface.bulkInsert('usuarios', [{
-      id: uuidv4(),
-      nombre: 'admin',
-      password: 'admin1234',
+    await queryInterface.bulkUpdate('usuarios', {
       rolId: adminRolId,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
+      password: 'admin1234',
+      updatedAt: new Date(),
+    }, { nombre: 'admin' });
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('usuarios', null, {});
+    // no-op
   }
 };
